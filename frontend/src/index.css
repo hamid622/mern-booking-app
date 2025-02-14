@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+@utility container {
+    @apply md:p-[1rem];
+}
