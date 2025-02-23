@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import * as apiClient from "../api-client";
 import { useMutation } from "@tanstack/react-query";
+import { useAppContext } from "../contexts/AppContext";
+import { useNavigate } from "react-router-dom";
 
 export interface RegisterFormSchema {
   firstName: string;
@@ -11,6 +13,8 @@ export interface RegisterFormSchema {
 }
 
 const Register = () => {
+  const navigate = useNavigate();
+  const { showToast } = useAppContext();
   const {
     register,
     watch,
@@ -21,10 +25,11 @@ const Register = () => {
   const mutation = useMutation({
     mutationFn: apiClient.register,
     onSuccess: () => {
-      console.log("user registered");
+      showToast({ message: "Account created successfully", type: "SUCCESS" });
+      navigate("/");
     },
     onError: (error: Error) => {
-      console.log(error.message);
+      showToast({ message: error.message, type: "ERROR" });
     },
   });
 
@@ -107,7 +112,7 @@ const Register = () => {
       <span>
         <button
           type="submit"
-          className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl"
+          className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl cursor-pointer"
         >
           Create Account
         </button>
