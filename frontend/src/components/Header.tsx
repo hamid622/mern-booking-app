@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
+import { useAppContext } from "../contexts/AppContext";
 
 const Header = () => {
-  const isLoggedIn = false;
+  const { isLoggedIn } = useAppContext();
 
   return (
     <div className="bg-blue-800 py-6">
