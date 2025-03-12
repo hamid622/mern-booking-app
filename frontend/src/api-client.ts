@@ -1,7 +1,7 @@
 import { RegisterFormSchema } from "./pages/Register";
 import { SignInFormData } from "./pages/SignIn";
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || ""; // i added "" because we are serving the frontend to backend
 
 export const register = async (formData: RegisterFormSchema) => {
   const response = await fetch(`${BACKEND_URL}/api/users/register`, {
